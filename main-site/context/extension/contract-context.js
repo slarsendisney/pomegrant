@@ -13,7 +13,7 @@ export const ExtensionProvider = ({ children }) => {
     );
     chrome.runtime.sendMessage(
       "icannhlkkebffkcfgonfhengcgibfpbb",
-      { accountId, privateKey, publicKey: public_key },
+      { accountId, privateKey, type: "NEAR_OAUTH" },
       function (response) {
         console.log(response);
       }

@@ -21,7 +21,7 @@ export default function Home() {
           </p>
 
           <div className="flex items-center justify-center space-x-2">
-            <Link href="/login">
+            <Link href="/pre-use">
               <a className="btn-primary">Get Started</a>
             </Link>
             <a className="btn-secondary">How it works</a>
@@ -30,7 +30,6 @@ export default function Home() {
       </div>
       <Features />
       <GettingStarted />
-    
     </div>
   );
 }

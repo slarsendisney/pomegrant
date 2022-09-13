@@ -6,6 +6,9 @@ html {
   @apply relative;
 }
 
+.full-page-wrapper {
+  @apply flex flex-col min-h-screen w-full items-center justify-center bg-pink-100 p-2 relative;
+}
 
 .card {
   @apply flex flex-col text-center p-8;

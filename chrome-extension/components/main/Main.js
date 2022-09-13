@@ -1,27 +1,48 @@
 import { useEffect, useState } from "react";
-import Logo from "../assets/Logo";
+import { useLocalStorage } from "../../utils/useLocalStorage";
 import NotSupported from "../notSupported/NotSupported";
 import Supported from "../supported/Supported";
 
 export const Main = () => {
   const [pageSupported, setPageSupported] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [activeURL, setActiveURL] = useState("");
+  const [pageWeight, setPageWeight] = useLocalStorage("page-weights", {});
+
+  useEffect(() => {
+    chrome.runtime.onMessage.addListener(function (request, sender) {
+      if (request.method === "pageWeight") {
+        chrome.tabs.query(
+          { active: true, currentWindow: true },
+          async function (tabs) {
+            var activeTab = tabs[0];
+            var activeTabURL = activeTab.url;
+            setActiveURL(activeTabURL);
+            const currenPageWeights = pageWeight;
+            if (
+              currenPageWeights[activeTabURL] &&
+              (!currenPageWeights[activeTabURL].adFree ||
+                !currenPageWeights[activeTabURL].normal)
+            ) {
+              currenPageWeights[activeTabURL][
+                request.adFree ? "adFree" : "normal"
+              ] = request.pageWeight;
+            } else {
+              currenPageWeights[activeTabURL] = {
+                [request.adFree ? "adFree" : "normal"]: request.pageWeight,
+              };
+            }
+            setPageWeight(currenPageWeights);
+          }
+        );
+      }
+    });
+  }, []);
 
   useEffect(() => {
     chrome.runtime.onMessage.addListener(function (request, sender) {
       if (request.method == "getMetas") {
         if (request.meta) {
-          chrome.tabs.query(
-            { active: true, currentWindow: true },
-            async function (tabs) {
-              var activeTab = tabs[0];
-              var activeTabId = activeTab.id;
-              chrome.scripting.executeScript({
-                target: { tabId: activeTabId },
-                files: ["go-ad-free.js"],
-              });
-            }
-          );
           setPageSupported(request.meta.content);
         }
         setLoading(false);
@@ -37,7 +58,7 @@ export const Main = () => {
         var activeTabId = activeTab.id;
         chrome.scripting.executeScript({
           target: { tabId: activeTabId },
-          files: ["grab-meta.js"],
+          files: ["grab-page-weight.js", "grab-meta.js"],
         });
       }
     );
@@ -49,5 +70,10 @@ export const Main = () => {
   if (!pageSupported) {
     return <NotSupported />;
   }
-  return <Supported pageSupported={pageSupported} />;
+  return (
+    <Supported
+      pageWeight={pageWeight[activeURL]}
+      pageSupported={pageSupported}
+    />
+  );
 };

@@ -19,7 +19,7 @@ const Login = () => {
         <button
           className="btn-primary w-full"
           onClick={() =>
-            chrome.tabs.create({ url: "https://sld.localhost/login" })
+            chrome.tabs.create({ url: "https://sld.localhost/pre-use" })
           }
         >
           <div className="flex space-x-2 items-center justify-center">

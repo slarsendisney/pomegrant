@@ -8,11 +8,11 @@ import React, {
 import { useRouter } from "next/router";
 import { Wallet } from "./near-wallet";
 import { Contract, utils } from "near-api-js";
+import Logo from "../../components/assets/Logo";
+import NEARLogo from "../../components/assets/NEARLogo";
+import AutoRefresh from "../../components/assets/AutoRefresh";
 
-const publicRoutes = [
-  "/",
-  "/pre-login",
-];
+const publicRoutes = ["/"];
 
 const THIRTY_TGAS = "30000000000000";
 
@@ -30,7 +30,6 @@ export const AuthProvider = ({ children }) => {
     }
     return true;
   }, [router.pathname]);
-
 
   // useEffect(() => {
   //   const location = window.location.href;
@@ -97,14 +96,36 @@ export const AuthProvider = ({ children }) => {
   }, [wallet]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="full-page-wrapper text-pink-800 space-y-4">
+        <AutoRefresh />
+        <p className="text-2xl font-medium ">Loading...</p>
+      </div>
+    );
   }
 
   if (!isSignedIn && authRequired) {
     return (
-      <button className="btn-primary" onClick={() => wallet.signIn({})}>
-        Sign In
-      </button>
+      <div className="full-page-wrapper text-pink-800">
+        <div className="card bg-white rounded flex items-center justify-center space-y-4 max-w-xl">
+          <Logo className="h-12 w-12" />
+          <h1 className="text-2xl font-medium">Welcome to Pomergrant</h1>
+          <p>Please sign in with your NEAR wallet to continue.</p>
+
+          <button
+            className="btn-primary flex space-x-2 items-center justify-center"
+            onClick={() =>
+              wallet.signIn({
+                successUrl: "https://sld.localhost/extension",
+                failureUrl: "https://sld.localhost/extension",
+              })
+            }
+          >
+            <NEARLogo className="h-4 w-4" />
+            <p>Sign in with NEAR</p>
+          </button>
+        </div>
+      </div>
     );
   }
 

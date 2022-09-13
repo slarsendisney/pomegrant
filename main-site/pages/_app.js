@@ -1,11 +1,14 @@
+import { LazyMotion, domAnimation } from "framer-motion";
 import { AuthProvider } from "../context/auth/auth-context";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <AuthProvider>
-      <Component {...pageProps} />
-    </AuthProvider>
+    <LazyMotion features={domAnimation}>
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
+    </LazyMotion>
   );
 }
 

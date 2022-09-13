@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "TESTER",
-  "short_name": "tester",
+  "name": "Pomegrant",
+  "short_name": "Pomegrant",
   "version": "1.0.0",
   "key": "abcdefghijklmnoabcdefhijklmnoabc",
-  "description": "A test chrome extension",
+  "description": "A Web3 alternative to adblockers that reduces carbon emissions and supports a creator economy.",
   "permissions": [
     "activeTab",
     "tabs",
@@ -13,21 +13,25 @@
     "storage",
     "scripting"
   ],
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["https://*.sld.localhost/*"],
+      "matches": ["https://*.sld.localhost/*", "*://localhost/*"],
       "js": ["inject.js"]
     }
   ],
   "action": {
-    "default_title": "Next.js app",
+    "default_title": "Pomegrant",
     "default_popup": "index.html"
   },
   "externally_connectable": {
     "ids": ["*"],
-    "matches": ["https://*.sld.localhost/*"]
+    "matches": ["https://*.sld.localhost/*", "*://localhost/*"]
   }
 }

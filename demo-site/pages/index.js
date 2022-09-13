@@ -1,13 +1,32 @@
 import Head from "next/head";
-import { useEffect } from "react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [hideAds, setHideAds] = useState(false);
+
   useEffect(() => {
-    document.addEventListener('csEvent', function (event) {
+    document.addEventListener("pomegrantEvent", function (event) {
       var data = event.detail;
-      window.goAdFree = true;
+      if (data === "PAGE_WEIGHT") {
+        const pageWeight = window.document.documentElement.innerHTML.length;
+        const adFree = window.goAdFree ? true : false;
+        console.log("pageWeight", pageWeight);
+        console.log("adFree", window.goAdFree);
+        chrome.runtime.sendMessage(
+          "icannhlkkebffkcfgonfhengcgibfpbb",
+          { pageWeight, adFree: adFree, type: "PAGE_WEIGHT" },
+          function () {}
+        );
+      }
+      if (data === "ADS_DISABLED") {
+        setHideAds(true);
+      }
+      if (data === "ADS_ENABLED") {
+        setHideAds(false);
+      }
+    });
   });
-  })
   return (
     <div>
       <Head>
@@ -17,9 +36,123 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <div className="prose mx-auto pt-12">
+          <div className="w-full rounded">
+            <Image
+              src={"/cover.jpg"}
+              width={1920}
+              height={1080}
+              className="rounded"
+            />
+          </div>
+          <h1>My Experience at Developer Week 2022</h1>
+          <p>
+            As web developers, we've been through many tech interviews, and they
+            can be frustrating - especially when those interviews don't even
+            have someone else on the other side! We've all paid our dues with
+            Hackerrank and Leetcode for the technical part of the process, but
+            with little feedback and no practice alternatives, there was never a
+            safe space to prepare for those recorded interviews once you make it
+            past the tech tests.
+          </p>
+          {hideAds ? (
+            <p>
+              Even once you finally feel ready to interview, you often don't
+              receive any feedback at all to help you improve for the next one!
+              The problem extends both ways - the harsh truth is that
+              interviewing well is hard.
+            </p>
+          ) : (
+            <div className="grid grid-cols-2 gap-4">
+              <p>
+                Even once you finally feel ready to interview, you often don't
+                receive any feedback at all to help you improve for the next
+                one! The problem extends both ways - the harsh truth is that
+                interviewing well is hard.
+              </p>
+              <div className="flex items-center justify-center rounded">
+                <Image
+                  src={"/pizza-ad.jpeg"}
+                  width={696}
+                  height={365}
+                  className="rounded w-full"
+                />
+              </div>
+            </div>
+          )}
+
+          <h2 id="our-solution">Our Solution</h2>
+          <p>
+            We built interview toast! A trifecta of three internal tools to help
+            you prepare, get feedback and assess.
+          </p>
+          <ul>
+            <li>
+              <strong>Interview Preparation Tool</strong>: There are a lot of
+              great tools out there to help you prepare for the coding part of
+              the application process. Interviews aren't just about code, and
+              there aren't a lot of tools out there specifically designed to
+              help you with the conversational part of the process. By
+              leveraging Symbl's conversation intelligence AI in our video
+              application, InterviewToast goes beyond simple speech-to-text and
+              provides real-time insights and extracts keywords, sentiment and
+              conversation analytics such as talk-to-listen ratios.
+            </li>
+            <li>
+              <strong>Interview Feedback Tool</strong>: By sourcing questions
+              directly from the candidate they want to practice, InterviewToast
+              extracts quantitative and qualitative feedback on practice
+              interview sessions to help candidates get ready to find their next
+              dream job.
+            </li>
+            <li>
+              <strong>Interview Assessment Tool</strong>: Our interview tool
+              goes beyond the practice rooms straight into the interview
+              battlefield. InterviewToast uses Agora to provide real-time
+              transcriptions, keyword and profanity detection, and analysis on
+              live interviews.
+            </li>
+          </ul>
+          {!hideAds && (
+            <Image
+              src={"/audible.jpeg"}
+              width={1087}
+              height={138}
+              className="rounded w-full"
+            />
+          )}
+
+          <h2 id="challenges">Challenges</h2>
+          <p>
+            WebRTC is something that scared me; I have been avoiding it until
+            now. This hackathon gave me a chance to face that fear. While I am
+            sure that our WebRTC integration is not perfect, I have learnt how
+            to implement it and, now feeling a little more confident, I can't
+            wait to work with it again.
+          </p>
+          <h2 id="next-steps">Next Steps</h2>
+          <p>
+            Although this hackathon took place over two weeks, there were still
+            a lot of features that we would have loved to implement that we did
+            not have time for. The following is a list of some of the extensions
+            we would like to implement next:
+          </p>
+          <ul>
+            <li>
+              <strong>Stripe Integration</strong>: We can't monetise the site
+              without integrating a payment API!
+            </li>
+            <li>
+              <strong>Pre-call Tests</strong> for Audio and Video: Verify
+              whether the internet quality is good enough for the interview.
+            </li>
+            <li>
+              <strong>Better Stats</strong>: We love data visualisation! We
+              would love to include interactive charts that drill down into the
+              data (with D3!).
+            </li>
+          </ul>
+        </div>
       </main>
     </div>
   );
