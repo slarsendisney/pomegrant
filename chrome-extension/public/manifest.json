@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "TESTER",
+  "short_name": "tester",
+  "version": "1.0.0",
+  "key": "abcdefghijklmnoabcdefhijklmnoabc",
+  "description": "A test chrome extension",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "identity",
+    "externally_connectable",
+    "storage",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.sld.localhost/*"],
+      "js": ["inject.js"]
+    }
+  ],
+  "action": {
+    "default_title": "Next.js app",
+    "default_popup": "index.html"
+  },
+  "externally_connectable": {
+    "ids": ["*"],
+    "matches": ["https://*.sld.localhost/*"]
+  }
+}

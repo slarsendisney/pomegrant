@@ -1,0 +1,1 @@
+document.dispatchEvent(new CustomEvent('csEvent', {detail: "Wooohoo!"}));

@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body{
+  @apply text-sm;
+}
+.login {
+  width: 300px;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card {
+  @apply flex flex-col text-center p-8;
+}
+
+.btn-primary {
+  @apply bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-3 rounded;
+}
+
+.btn-secondary {
+  @apply bg-pink-200 hover:bg-pink-300 text-pink-800 font-bold py-2 px-3 rounded;
+}
+

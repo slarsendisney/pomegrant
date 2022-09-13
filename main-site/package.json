@@ -1,0 +1,62 @@
+{
+  "name": "near-hack",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "lint:build": "mv ./out/_next ./out/next && cd ./out && grep -rli '_next' * | xargs -I@ sed -i '' 's|/_next|/next|g' @;",
+    "build": "next build && next export && npm run lint:build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.0.11",
+    "@near-wallet-selector/core": "^7.0.1",
+    "@near-wallet-selector/default-wallets": "^7.0.1",
+    "@near-wallet-selector/ledger": "^7.0.1",
+    "@near-wallet-selector/math-wallet": "^7.0.1",
+    "@near-wallet-selector/meteor-wallet": "^7.0.1",
+    "@near-wallet-selector/modal-ui-js": "^7.0.1",
+    "@near-wallet-selector/my-near-wallet": "^7.0.1",
+    "@near-wallet-selector/near-wallet": "^7.0.1",
+    "@near-wallet-selector/nightly": "^7.0.1",
+    "@near-wallet-selector/nightly-connect": "^7.0.1",
+    "@near-wallet-selector/sender": "^7.0.1",
+    "@near-wallet-selector/wallet-connect": "^7.0.1",
+    "near-api-js": "^0.44.2",
+    "next": "^12.3.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.8",
+    "eslint": "8.23.0",
+    "eslint-config-next": "12.3.0",
+    "npm-watch": "^0.11.0",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8"
+  },
+  "watch": {
+    "build": {
+      "patterns": [
+        "styles/**",
+        "pages/**",
+        "components/**",
+        "context/**",
+        "public/**",
+        "helpers/**",
+        "next.config.js"
+      ],
+      "ignore": [
+        "out",
+        "node_modules",
+        ".next",
+        ".vscode"
+      ],
+      "extensions": [
+        "js",
+        "json"
+      ]
+    }
+  }
+}
