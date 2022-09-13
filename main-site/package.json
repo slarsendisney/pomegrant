@@ -7,7 +7,8 @@
     "lint:build": "mv ./out/_next ./out/next && cd ./out && grep -rli '_next' * | xargs -I@ sed -i '' 's|/_next|/next|g' @;",
     "build": "next build && next export && npm run lint:build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "count": "cloc --exclude-ext=svg --not-match-d=assets components context hooks pages public styles utils"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.11",
