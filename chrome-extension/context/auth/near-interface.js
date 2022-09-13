@@ -13,14 +13,14 @@ export class NEARContract {
     });
   }
 
-  async sponsor({ beneficiaryId, amount = 0.1 }) {
+  async sponsor({ beneficiaryId, amount = 0.1, carbon }) {
     let deposit = utils.format.parseNearAmount(amount.toString());
 
     let response = await this.wallet.wallet.callMethod({
       contractId: this.contractId,
       method: "sponsor",
       deposit,
-      args: { beneficiary_id: beneficiaryId },
+      args: { beneficiary_id: beneficiaryId, carbon },
     });
     return response;
   }

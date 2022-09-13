@@ -66,15 +66,16 @@ const Supported = ({ pageSupported, pageWeight }) => {
   }, [active]);
 
   useEffect(() => {
-    if (active) {
-      setCarbonSaved((carbonSaved) => carbonSaved + 4.61 * 0.18);
-      const interval = setInterval(() => {
-        setCarbonSaved((carbonSaved) => carbonSaved + 4.61 * 0.18);
-        sendToContract(pageSupported, 0.001);
+    const carbonSavedAmount = 4.61 * 0.18;
+    const interval = setInterval(() => {
+      if (active) {
+        setCarbonSaved((carbonSaved) => carbonSaved + carbonSavedAmount);
+        setCarbonSaved((carbonSaved) => carbonSaved + carbonSavedAmount);
+        sendToContract(pageSupported, 0.001, carbonSavedAmount);
         setAmount((amount) => amount + 0.001);
-      }, 20000);
-      return () => clearInterval(interval);
-    }
+      }
+    }, 20000);
+    return () => clearInterval(interval);
   }, [active]);
 
   return (
@@ -112,8 +113,10 @@ const Supported = ({ pageSupported, pageWeight }) => {
           <div className="bg-pink-100 text-pink-800 p-1 rounded flex space-x-2 items-center px-2">
             <Globe className="h-6 w-6" />
             <p>
-              <span className="font-bold">{carbonSaved.toFixed(1)}g</span> of
-              carbon saved
+              <span className="font-bold">
+                {parseFloat(carbonSaved).toFixed(3)}g
+              </span>{" "}
+              of carbon saved
             </p>
           </div>
           <div className="bg-pink-100 text-pink-800 p-1 rounded flex space-x-2 items-center px-2">

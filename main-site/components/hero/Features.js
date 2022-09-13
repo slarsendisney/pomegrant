@@ -1,31 +1,39 @@
-import { SparklesIcon, ScaleIcon, LightBulbIcon } from '@heroicons/react/24/outline'
+import {
+  SparklesIcon,
+  ScaleIcon,
+  LightBulbIcon,
+} from "@heroicons/react/24/outline";
+import NEARLogo from "../assets/NEARLogo";
 
 const features = [
   {
-    name: 'Automatic Auditing',
+    name: "Say goodbye to ads",
     description:
-      "Simply add our integration and we will monitor webpage performance, pageweight, hosting and carbon footprint.",
+      "Ads can make up to 70% of a website's pageweight. Every MB you download, requires more energy to process. We're here to help you reduce that carbon footprint.",
     icon: SparklesIcon,
   },
   {
-    name: 'Comparison & Judgement',
+    name: "Fair to creators",
     description:
-      'Every webpage is given a unique audit score to help you understand how it compares to other webpages and to help create competition.',
+      "We believe that creators should be paid for their work. When using Pomegrant you are paying for the content you are consuming.",
     icon: ScaleIcon,
   },
   {
-    name: 'Follow Up & Action Items',
+    name: "Utilise your NEAR",
     description:
-      'Every audit is followed up with action items to help you understand the biggest changes you could make to help improve your score.',
-    icon: LightBulbIcon,
+      "Our extension is built on the NEAR blockchain. A carbon neutral blockchain that is 200,000x more energy efficient than Bitcoin.",
+    icon: NEARLogo,
   },
-]
+];
 
 export default function Features() {
   return (
     <div className="py-12">
       <div className="max-w-xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h2 className="sr-only">A better way to send money.</h2>
+      <h2 className="text-pink-700 text-3xl tracking-tight font-extrabold sm:text-4xl">
+          Together we can reduce our digital carbon footprint, all while
+          promoting a creator economy.
+        </h2>
         <dl className="space-y-10 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-8">
           {features.map((feature) => (
             <div key={feature.name}>
@@ -33,7 +41,9 @@ export default function Features() {
                 <div className="flex items-center justify-center h-12 w-12 rounded-md bg-accent-background text-pink-600">
                   <feature.icon className="h-6 w-6" aria-hidden="true" />
                 </div>
-                <p className="mt-5 text-lg leading-6 font-medium text-accent-text">{feature.name}</p>
+                <p className="mt-5 text-lg  font-medium text-accent-text">
+                  {feature.name}
+                </p>
               </dt>
               <dd className="mt-2 text-base">{feature.description}</dd>
             </div>
@@ -41,5 +51,5 @@ export default function Features() {
         </dl>
       </div>
     </div>
-  )
+  );
 }

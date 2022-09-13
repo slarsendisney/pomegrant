@@ -1,19 +1,19 @@
 /* This example requires Tailwind CSS v2.0+ */
 const posts = [
   {
-    title: "Install the app",
+    title: "Install the extension",
     description:
-      'Install the EarthBound for free via the monday.com marketplace or click the "Add to monday.com" button below.',
+      'Install the Pomegrant extension for free via chrome webstore.',
   },
   {
-    title: "Add our workflow",
+    title: "Connect with NEAR",
     description:
-      "Add our workflow to any board you like, linking the column where urls are mentioned (both link and text column types are supported).",
+      "Connect your NEAR wallet and link it to the extension.",
   },
   {
     title: "You're all set",
     description:
-      "Our integration will automatically start listening for mentions of URLs. When a URL is mentioned the integration will go away and audit that URL.",
+      "You're ready to start supporting your favorite creators - navigate the web ad free.",
   },
 ];
 

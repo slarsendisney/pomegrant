@@ -85,9 +85,9 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const sendToContract = useCallback(
-    (beneficiary_id, amount) => {
+    (beneficiary_id, amount, carbon) => {
       let deposit = utils.format.parseNearAmount(amount.toString());
-      return contract.sponsor({ beneficiary_id }, THIRTY_TGAS, deposit);
+      return contract.sponsor({ beneficiary_id, carbon }, THIRTY_TGAS, deposit);
     },
     [contract]
   );

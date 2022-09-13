@@ -985,7 +985,7 @@ let PaintoContract = (_dec = NearBindgen({}), _dec2 = initialize({}), _dec3 = ca
 
     sponsoredSoFar += donationAmount;
     this.sponsorships.set(sponsor, sponsoredSoFar.toString());
-    log(`Thank you ${sponsor} for donating ${donationAmount}! You donated a total of ${sponsoredSoFar}`); // Send the money to the beneficiary
+    log(`Thank you ${sponsor} for sponsoring ${beneficiary_id} with ${donationAmount}!`); // Send the money to the beneficiary
 
     const promise = promiseBatchCreate(beneficiary_id);
     promiseBatchActionTransfer(promise, toTransfer); // Return the total amount donated so far
@@ -1007,7 +1007,7 @@ let PaintoContract = (_dec = NearBindgen({}), _dec2 = initialize({}), _dec3 = ca
 
     for (let i = from_index; i < end; i++) {
       const account_id = this.sponsorships.keys.get(i);
-      const donation = this.get_donation_for_account({
+      const donation = this.get_sponsorship_for_account({
         account_id,
         beneficiary_id
       });
@@ -1017,7 +1017,7 @@ let PaintoContract = (_dec = NearBindgen({}), _dec2 = initialize({}), _dec3 = ca
     return ret;
   }
 
-  get_donation_for_account({
+  get_sponsorship_for_account({
     account_id,
     beneficiary_id
   }) {
@@ -1028,8 +1028,8 @@ let PaintoContract = (_dec = NearBindgen({}), _dec2 = initialize({}), _dec3 = ca
     });
   }
 
-}, (_applyDecoratedDescriptor(_class2.prototype, "init", [_dec2], Object.getOwnPropertyDescriptor(_class2.prototype, "init"), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, "sponsor", [_dec3], Object.getOwnPropertyDescriptor(_class2.prototype, "sponsor"), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, "number_of_sponsorships", [_dec4], Object.getOwnPropertyDescriptor(_class2.prototype, "number_of_sponsorships"), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, "get_sponsorships", [_dec5], Object.getOwnPropertyDescriptor(_class2.prototype, "get_sponsorships"), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, "get_donation_for_account", [_dec6], Object.getOwnPropertyDescriptor(_class2.prototype, "get_donation_for_account"), _class2.prototype)), _class2)) || _class);
-function get_donation_for_account() {
+}, (_applyDecoratedDescriptor(_class2.prototype, "init", [_dec2], Object.getOwnPropertyDescriptor(_class2.prototype, "init"), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, "sponsor", [_dec3], Object.getOwnPropertyDescriptor(_class2.prototype, "sponsor"), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, "number_of_sponsorships", [_dec4], Object.getOwnPropertyDescriptor(_class2.prototype, "number_of_sponsorships"), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, "get_sponsorships", [_dec5], Object.getOwnPropertyDescriptor(_class2.prototype, "get_sponsorships"), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, "get_sponsorship_for_account", [_dec6], Object.getOwnPropertyDescriptor(_class2.prototype, "get_sponsorship_for_account"), _class2.prototype)), _class2)) || _class);
+function get_sponsorship_for_account() {
   let _state = PaintoContract._getState();
 
   if (!_state && PaintoContract._requireInit()) {
@@ -1044,7 +1044,7 @@ function get_donation_for_account() {
 
   let _args = PaintoContract._getArgs();
 
-  let _result = _contract.get_donation_for_account(_args);
+  let _result = _contract.get_sponsorship_for_account(_args);
   if (_result !== undefined) if (_result && _result.constructor && _result.constructor.name === "NearPromise") _result.onReturn();else env.value_return(PaintoContract._serialize(_result));
 }
 function get_sponsorships() {
@@ -1120,5 +1120,5 @@ function init() {
   if (_result !== undefined) if (_result && _result.constructor && _result.constructor.name === "NearPromise") _result.onReturn();else env.value_return(PaintoContract._serialize(_result));
 }
 
-export { get_donation_for_account, get_sponsorships, init, number_of_sponsorships, sponsor };
+export { get_sponsorship_for_account, get_sponsorships, init, number_of_sponsorships, sponsor };
 //# sourceMappingURL=contract.js.map
